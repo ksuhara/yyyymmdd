@@ -1,19 +1,20 @@
-const { expect } = require("chai");
-const { ethers } = require("hardhat");
+import * as chai from "chai";
+import { solidity } from "ethereum-waffle";
+import hre, { ethers } from "hardhat";
 
-describe("Greeter", function () {
-  it("Should return the new greeting once it's changed", async function () {
-    const Greeter = await ethers.getContractFactory("Greeter");
-    const greeter = await Greeter.deploy("Hello, world!");
-    await greeter.deployed();
+chai.use(solidity);
+const { expect } = chai;
 
-    expect(await greeter.greet()).to.equal("Hello, world!");
+describe("NFT", function () {
+  let nftContract: any;
+  this.beforeEach(async function () {
+    const YYYYMMDDContract = await ethers.getContractFactory("YYYYMMDD");
+    nftContract = await YYYYMMDDContract.deploy("YYYYMMDD", "YMD");
+  });
 
-    const setGreetingTx = await greeter.setGreeting("Hola, mundo!");
-
-    // wait until the transaction is mined
-    await setGreetingTx.wait();
-
-    expect(await greeter.greet()).to.equal("Hola, mundo!");
+  it("Test", async function () {
+    await nftContract.mint(5000);
+    const tokenURI = await nftContract.tokenURI(5000);
+    console.log(tokenURI);
   });
 });
