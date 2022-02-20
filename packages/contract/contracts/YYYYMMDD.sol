@@ -14,6 +14,7 @@ contract YYYYMMDD is ERC721, Ownable {
   constructor(string memory name, string memory symbol) ERC721(name, symbol) {}
 
   function mint(uint256 tokenId) public {
+    require(BokkyPooBahsDateTimeLibrary.addDays(0, tokenId - 1) < block.timestamp);
     _safeMint(msg.sender, tokenId);
   }
 
