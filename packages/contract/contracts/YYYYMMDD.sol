@@ -13,12 +13,12 @@ contract YYYYMMDD is ERC721, Ownable {
 
   constructor(string memory name, string memory symbol) ERC721(name, symbol) {}
 
-  function mint(uint256 tokenId) public onlyOwner {
+  function mint(uint256 tokenId) public {
     _safeMint(msg.sender, tokenId);
   }
 
   function tokenURI(uint256 tokenId) public view override returns (string memory) {
-    uint256 tokenTimeStamp = BokkyPooBahsDateTimeLibrary.addDays(0, tokenId);
+    uint256 tokenTimeStamp = BokkyPooBahsDateTimeLibrary.addDays(0, tokenId - 1);
     string[5] memory parts;
     parts[
       0

@@ -13,8 +13,8 @@ describe("NFT", function () {
   });
 
   it("Test", async function () {
-    await nftContract.mint(5000);
-    const tokenURI = await nftContract.tokenURI(5000);
+    await nftContract.mint(1);
+    const tokenURI = await nftContract.tokenURI(1);
     console.log(tokenURI);
   });
 });
